@@ -209,7 +209,7 @@ async def test_memory_with_user_global_microagents(tmp_path):
     user_global_microagent_content = """---
 name: test_user_global
 type: knowledge
-trigger: test_trigger
+triggers: [test_trigger]
 ---
 
 This is a test microagent from the user's global directory.

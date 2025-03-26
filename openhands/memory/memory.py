@@ -27,6 +27,14 @@ GLOBAL_MICROAGENTS_DIR = os.path.join(
     'microagents',
 )
 
+# This function will be used to get the user's global microagents directory
+def get_user_global_microagents_dir() -> str:
+    return os.path.join(
+        os.path.expanduser('~'),
+        '.openhands-state',
+        'global-microagents',
+    )
+
 
 class Memory:
     """
@@ -248,8 +256,11 @@ class Memory:
 
     def _load_global_microagents(self) -> None:
         """
-        Loads microagents from the global microagents_dir
+        Loads microagents from:
+        1. The global microagents_dir (public microagents)
+        2. The user's global microagents directory (~/.openhands-state/global-microagents)
         """
+        # Load public microagents
         repo_agents, knowledge_agents, _ = load_microagents_from_dir(
             GLOBAL_MICROAGENTS_DIR
         )
@@ -259,6 +270,19 @@ class Memory:
         for name, agent in repo_agents.items():
             if isinstance(agent, RepoMicroAgent):
                 self.repo_microagents[name] = agent
+
+        # Load user's global microagents if the directory exists
+        user_global_dir = get_user_global_microagents_dir()
+        if os.path.exists(user_global_dir):
+            user_repo_agents, user_knowledge_agents, _ = load_microagents_from_dir(
+                user_global_dir
+            )
+            for name, agent in user_knowledge_agents.items():
+                if isinstance(agent, KnowledgeMicroAgent):
+                    self.knowledge_microagents[name] = agent
+            for name, agent in user_repo_agents.items():
+                if isinstance(agent, RepoMicroAgent):
+                    self.repo_microagents[name] = agent
 
     def _load_custom_microagents(self) -> None:
         """
