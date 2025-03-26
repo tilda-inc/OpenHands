@@ -42,7 +42,7 @@ def memory(event_stream):
     """Create a test memory instance."""
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    memory = Memory(event_stream, 'test_sid')
+    memory = Memory(event_stream=event_stream, sid='test_sid', custom_microagents_dir=None)
     yield memory
     loop.close()
 
@@ -144,6 +144,7 @@ async def test_memory_with_microagents():
     memory = Memory(
         event_stream=event_stream,
         sid='test-session',
+        custom_microagents_dir=None,
     )
 
     # Verify microagents were loaded - at least one microagent should be loaded
@@ -221,6 +222,7 @@ REPOSITORY INSTRUCTIONS: This is a test repository.
         memory = Memory(
             event_stream=event_stream,
             sid='test-session',
+            custom_microagents_dir=None,
         )
 
         # Set repository info
