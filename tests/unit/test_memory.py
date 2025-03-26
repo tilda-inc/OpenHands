@@ -42,7 +42,9 @@ def memory(event_stream):
     """Create a test memory instance."""
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    memory = Memory(event_stream=event_stream, sid='test_sid', custom_microagents_dir=None)
+    memory = Memory(
+        event_stream=event_stream, sid='test_sid', custom_microagents_dir=None
+    )
     yield memory
     loop.close()
 

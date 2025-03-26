@@ -862,7 +862,9 @@ async def test_run_controller_with_memory_error(test_event_stream):
     runtime.event_stream = event_stream
 
     # Create a real Memory instance
-    memory = Memory(event_stream=event_stream, sid='test-memory', custom_microagents_dir=None)
+    memory = Memory(
+        event_stream=event_stream, sid='test-memory', custom_microagents_dir=None
+    )
 
     # Patch the _find_microagent_knowledge method to raise our test exception
     def mock_find_microagent_knowledge(*args, **kwargs):
