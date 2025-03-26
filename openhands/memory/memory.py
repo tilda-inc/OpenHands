@@ -72,7 +72,7 @@ class Memory:
         self._load_global_microagents()
 
         # Load custom microagents (Knowledge + Repo)
-        # from typically user-defined microagents directory
+        # from a user-defined microagents directory
         self._load_custom_microagents()
 
     def on_event(self, event: Event):
