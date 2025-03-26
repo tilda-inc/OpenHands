@@ -71,7 +71,7 @@ class Memory:
         # from typically OpenHands/microagents (i.e., the PUBLIC microagents)
         self._load_global_microagents()
 
-        # Load custom microagents (Knowledge + Repo)
+        # Load custom microagents (Knowledge)
         # from a user-defined microagents directory
         self._load_custom_microagents()
 
@@ -269,8 +269,6 @@ class Memory:
             for name, agent in custom_agents.items():
                 if isinstance(agent, KnowledgeMicroAgent):
                     self.knowledge_microagents[name] = agent
-                elif isinstance(agent, RepoMicroAgent):
-                    self.repo_microagents[name] = agent
 
     def set_repository_info(self, repo_name: str, repo_directory: str) -> None:
         """Store repository info so we can reference it in an observation."""
