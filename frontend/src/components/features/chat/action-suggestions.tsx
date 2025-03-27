@@ -31,9 +31,12 @@ export function ActionSuggestions({
                   value:
                     "Please push the changes to a remote branch on GitHub, but do NOT create a pull request. Please use the exact SAME branch name as the one you are currently on.",
                 }}
-                onClick={(value) => {
+                onClick={() => {
                   posthog.capture("push_to_branch_button_clicked");
-                  onSuggestionsClick(value);
+                  // Ensure we're sending the correct value for this button
+                  onSuggestionsClick(
+                    "Please push the changes to a remote branch on GitHub, but do NOT create a pull request. Please use the exact SAME branch name as the one you are currently on.",
+                  );
                 }}
               />
               <SuggestionItem
@@ -42,9 +45,12 @@ export function ActionSuggestions({
                   value:
                     "Please push the changes to GitHub and open a pull request. Please create a meaningful branch name that describes the changes.",
                 }}
-                onClick={(value) => {
+                onClick={() => {
                   posthog.capture("create_pr_button_clicked");
-                  onSuggestionsClick(value);
+                  // Ensure we're sending the correct value for this button
+                  onSuggestionsClick(
+                    "Please push the changes to GitHub and open a pull request. Please create a meaningful branch name that describes the changes.",
+                  );
                   setHasPullRequest(true);
                 }}
               />
@@ -56,9 +62,12 @@ export function ActionSuggestions({
                 value:
                   "Please push the latest changes to the existing pull request.",
               }}
-              onClick={(value) => {
+              onClick={() => {
                 posthog.capture("push_to_pr_button_clicked");
-                onSuggestionsClick(value);
+                // Ensure we're sending the correct value for this button
+                onSuggestionsClick(
+                  "Please push the latest changes to the existing pull request.",
+                );
               }}
             />
           )}
